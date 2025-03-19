@@ -11,8 +11,28 @@
     <form action="/submit" method="post">
         Name: <input type="text" name="name" required><br>
         Email: <input type="email" name="email" required><br>
-        Phone: <input type="text" name="phone"><br>
+        Phone: <input type="text" name="phone" id="phone" required><br>
         <input type="submit" value="Submit">
     </form>
+
+    <script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            let phone = document.querySelector("input[name='phone']").value;
+            let email = document.querySelector("input[name='email']").value;
+
+            // Validate phone number (must be exactly 10 digits)
+            if (!/^\d{10}$/.test(phone)) {
+                alert("Phone number must be exactly 10 digits.");
+                event.preventDefault();
+            }
+
+            // Validate email format
+            if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+                alert("Invalid email format.");
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>
+
